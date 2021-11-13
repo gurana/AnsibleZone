@@ -14,6 +14,50 @@ sudo apt-add-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible
 ansible --version
 
+* check connection from control serve to node
+
+## ansible -i <inventory> --private-key jpmc.pem -u ubuntu -m ping all
+
+* if we have different flavor of server ,, then we need to  add in inventory like _ ansible_user= centos_ 
+
+## how to make ansible towards our deployment 
+
+  * _ playbook -> play -> task -> one module_  for does the work..
+
+* Ansible has lot of modules..which it will help us automate the deployment 
+
+ansible has bunch of modules to work..
+
+## create apache server on ununtu mechine 
+
+* First we need to check with manual 
+'''
+  sudo apt update 
+  sudo apt install apcahe -y
+
+  ###apache.yaml
+
+  ---
+- name: apache
+  hosts: all
+  become: yes
+  tasks: 
+    - name: update ubuntu packages and install apache server
+      apt: 
+        name: install apache
+        update_cache: yes
+        state: present
+#####        
+
+
+
+
+
+
+
+
+
+
 
 
 
