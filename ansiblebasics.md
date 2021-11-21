@@ -44,10 +44,14 @@ ansible has bunch of modules to work..
   tasks: 
     - name: update ubuntu packages and install apache server
       apt: 
-        name: install apache
+        name: apache2
         update_cache: yes
         state: present
 #####        
+
+* to make this execution we need to give inventory, private key and   yaml file name.
+
+*  When you can playbook many times ..it wont change any thing ..only first  time it will be change ,, next time onwards it wont show any thing ... The is _ idempotant_
 
 
 

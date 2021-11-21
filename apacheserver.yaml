@@ -5,6 +5,6 @@
   tasks: 
     - name: update ubuntu packages and install apache server
       apt: 
-        name: install apache
+        name: apache2
         update_cache: yes
         state: present
