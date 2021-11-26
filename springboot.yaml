@@ -2,27 +2,34 @@
 - name: deploy spring boot application 
   hosts: all 
   become: yes 
-  tasks: 
+  vars: 
+    java_package: openjdk-11-jdk
+    app_dir: /usr/share/springpetclinic
+    app_url: https://referenceapplicationskhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
+    app_user: springbootuser
+    app_dest: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
+  tasks:
+   
     - name: update and install java
       apt: 
-        name: openjdk-11-jdk
+        name: "{{ java_package }}"
         update_cache:  yes
         state: present 
     - name: create a directory for springpetclinic
       file: 
-        path: /usr/share/springpetclinic
+        path: "{{ app_dir }}"
         state: directory
     - name: Download and copy the file
       get_url: 
-        url: https://referenceapplicationskhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
-        dest: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
+        url: "{{ app_url }}"
+        dest: "{{ app_dest }}"
     - name: create springboot user 
       user: 
-        name: springbootuser
+        name: "{{ app_user }}"
         state: present
     - name: change ownership of jar file
       file: 
-        path: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
+        path: "{{ app_dest }}"
         owner: springbootuser
         mode: '500'
         state: file
