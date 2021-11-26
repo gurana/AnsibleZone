@@ -51,7 +51,24 @@ ansible has bunch of modules to work..
 
 * to make this execution we need to give inventory, private key and   yaml file name.
 
-*  When you can playbook many times ..it wont change any thing ..only first  time it will be change ,, next time onwards it wont show any thing ... The is _ idempotant_
+*  When you can playbook many times ..it wont change any thing ..only first  time it will be change ,, next time onwards it wont show any thing ..
+. The is _ idempotant_
+
+* we can cteate invenotry in 2 wats 
+   -> INI Format  -> ansible -i sample-ini all --list-hosts
+   ungrouped means only ip's are there in inventory -> ansible -i sample-ini ungrouped --list-hosts
+   -> yaml Format
+
+
+## Debug module
+this is used to display message what is we want
+## Setup module
+it  will 
+
+## Handlers with notify
+
+when ever some reaction happend for that action tha ttime we can use handlers.
+
 
 
 

@@ -8,8 +8,14 @@
     app_url: https://referenceapplicationskhaja.s3-us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
     app_user: springbootuser
     app_dest: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
+    test_var: this is  just for testing
   tasks:
-   
+    - name: display java package
+      debug:
+        var: java_package
+    - name: checking variables
+      debug:
+        var: test_var
     - name: update and install java
       apt: 
         name: "{{ java_package }}"
