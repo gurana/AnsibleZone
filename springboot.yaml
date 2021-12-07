@@ -10,6 +10,10 @@
     app_dest: /usr/share/springpetclinic/spring-petclinic-2.4.2.jar
     test_var: this is  just for testing
   tasks:
+    - name: Fail the execution when the distribution is not a ubuntu
+      fail: 
+        msg: "This playbook  will work only on ubuntu and support for other OS soon"
+      when: ansible_facts['distribution']!="ubuntu"
     - name: display java package
       debug:
         var: java_package
@@ -33,12 +37,8 @@
       user: 
         name: "{{ app_user }}"
         state: present
-    - name: change ownership of jar file
-      file: 
-        path: "{{ app_dest }}"
-        owner: springbootuser
-        mode: '500'
-        state: file
+      notify:
+        - change ownership of jar file
     - name: copy the spring petclinic service file
       copy: 
         dest: /etc/systemd/system/springpetclinic.service
@@ -48,4 +48,11 @@
         name: springpetclinic.service
         enabled: yes
         state: started
+  handlers:
+    - name: change ownership of jar file
+      file: 
+        path: "{{ app_dest }}"
+        owner: springbootuser
+        mode: '500'
+        state: file
         
